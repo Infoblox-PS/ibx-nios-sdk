@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (C) 2026 Infoblox, Inc.
+"""LocaluserAuthserviceResource - full implementation."""
+
+from __future__ import annotations
+
+from ibx_nios_sdk._resource import WapiResource
+from ibx_nios_sdk.security.models.localuser_authservice import (
+    READONLY_FIELDS,
+    LocaluserAuthservice,
+)
+
+
+class LocaluserAuthserviceResource(WapiResource[LocaluserAuthservice]):
+    """Access NIOS local-user authentication service (read-only singleton)."""
+
+    _wapi_type = "localuser:authservice"
+    _model = LocaluserAuthservice
+    _default_return_fields = ["name", "comment"]
+    _readonly_fields = set(READONLY_FIELDS)

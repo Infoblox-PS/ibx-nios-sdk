@@ -1,0 +1,420 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+/* Copyright (C) 2026 Infoblox, Inc. */
+/*
+ * Infoblox Brand Theme for Zensical / Material for MkDocs
+ *
+ * Brand Guidelines Version 20250613v2
+ * Primary: Infoblox Black (#101820) + Green (#00BD4D)
+ * Gradient: Yellow (#FEDD00) > Green (#00BD4D) > Teal (#00E2EC)
+ * Typography: Lato (internal/web)
+ */
+
+/* ============================================================================
+ * Google Fonts: Lato
+ * ========================================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700&display=swap");
+
+/* ============================================================================
+ * CSS Custom Properties: Light Mode
+ * ========================================================================= */
+
+:root,
+[data-md-color-scheme="default"] {
+  /* Brand colors */
+  --ibx-black: #101820;
+  --ibx-green: #00BD4D;
+  --ibx-evergreen: #00594C;
+  --ibx-off-white: #F0EFE9;
+  --ibx-steel: #D9E1E2;
+  --ibx-teal: #00E2EC;
+  --ibx-teal-alt: #12C2D3;
+  --ibx-yellow: #FEDD00;
+  --ibx-blue-gray: #202D37;
+
+  /* Text accent. Infoblox Green is only 2.50:1 on white, below the WCAG AA
+     4.5:1 floor, so text and icons in the light scheme use Evergreen (8.29:1).
+     Green still carries rules, borders, the gradient and other non-text marks,
+     where the contrast minimum does not apply. */
+  --ibx-accent-text: var(--ibx-evergreen);
+  --ibx-accent-text-hover: var(--ibx-black);
+
+  /* Material theme overrides */
+  --md-primary-fg-color: var(--ibx-black);
+  --md-primary-bg-color: #FFFFFF;
+  --md-accent-fg-color: var(--ibx-accent-text);
+  --md-accent-bg-color: var(--ibx-off-white);
+
+  /* Text */
+  --md-default-fg-color: var(--ibx-black);
+  --md-default-fg-color--light: #3a4450;
+  --md-default-fg-color--lighter: #5a6570;
+  --md-default-fg-color--lightest: #8a9098;
+
+  /* Typography */
+  --md-text-font: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  --md-code-font: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+
+  /* Links */
+  --md-typeset-a-color: var(--ibx-accent-text);
+
+  /* Code blocks */
+  --md-code-bg-color: var(--ibx-off-white);
+  --md-code-fg-color: var(--ibx-black);
+
+  /* Footer */
+  --md-footer-bg-color: var(--ibx-black);
+  --md-footer-bg-color--dark: #0a0f14;
+  --md-footer-fg-color: #FFFFFF;
+  --md-footer-fg-color--light: var(--ibx-steel);
+  --md-footer-fg-color--lighter: #8a9098;
+}
+
+/* ============================================================================
+ * CSS Custom Properties: Dark Mode
+ * ========================================================================= */
+
+[data-md-color-scheme="slate"] {
+  /* On the dark canvas Green reaches 7.56:1 and Teal 8.73:1, so both carry
+     text here. */
+  --ibx-accent-text: var(--ibx-green);
+  --ibx-accent-text-hover: var(--ibx-teal-alt);
+
+  /* Material theme overrides */
+  --md-primary-fg-color: var(--ibx-black);
+  --md-primary-bg-color: var(--ibx-off-white);
+  --md-accent-fg-color: var(--ibx-accent-text);
+
+  /* Background */
+  --md-default-bg-color: #0d1117;
+  --md-default-bg-color--light: #151b23;
+  --md-default-bg-color--lighter: #1c2430;
+  --md-default-bg-color--lightest: #242c38;
+
+  /* Text */
+  --md-default-fg-color: #e0e0e0;
+  --md-default-fg-color--light: #b0b8c0;
+  --md-default-fg-color--lighter: #8090a0;
+  --md-default-fg-color--lightest: #506070;
+
+  /* Typography */
+  --md-text-font: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  --md-code-font: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+
+  /* Links */
+  --md-typeset-a-color: var(--ibx-accent-text);
+
+  /* Code blocks */
+  --md-code-bg-color: #151b23;
+  --md-code-fg-color: #e0e0e0;
+
+  /* Footer */
+  --md-footer-bg-color: var(--ibx-black);
+  --md-footer-bg-color--dark: #0a0f14;
+  --md-footer-fg-color: #FFFFFF;
+  --md-footer-fg-color--light: var(--ibx-steel);
+  --md-footer-fg-color--lighter: #8a9098;
+}
+
+/* ============================================================================
+ * Header / Top Navigation
+ * ========================================================================= */
+
+.md-header {
+  background-color: var(--ibx-black);
+  color: #FFFFFF;
+}
+
+/* Force white text and icons in header regardless of color scheme */
+.md-header .md-header__title,
+.md-header .md-header__topic,
+.md-header .md-header__button,
+.md-header .md-icon,
+.md-header .md-search__icon,
+.md-header [data-md-component="palette"] label {
+  color: #FFFFFF;
+}
+
+.md-header .md-search__input {
+  color: #FFFFFF;
+}
+
+.md-header .md-search__input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.md-header__title {
+  font-family: var(--md-text-font);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Logo sizing in header */
+.md-header__button.md-logo img {
+  height: 1.2rem;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Primary gradient accent bar under header */
+.md-header::after {
+  content: "";
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, #FEDD00 0%, #00BD4D 35%, #00E2EC 100%);
+}
+
+/* ============================================================================
+ * Navigation Sidebar
+ * ========================================================================= */
+
+/* Active nav item uses the scheme's accent text colour */
+.md-nav__item--active > .md-nav__link {
+  color: var(--ibx-accent-text);
+  font-weight: 700;
+}
+
+.md-nav__link:hover {
+  color: var(--ibx-accent-text);
+}
+
+.md-nav__link--active {
+  color: var(--ibx-accent-text);
+  font-weight: 700;
+}
+
+/* ============================================================================
+ * Typography
+ * ========================================================================= */
+
+body,
+.md-typeset {
+  font-family: var(--md-text-font);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Headlines: Lato Bold/Black per brand guidelines */
+.md-typeset h1 {
+  font-family: var(--md-text-font);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--md-default-fg-color);
+}
+
+.md-typeset h2 {
+  font-family: var(--md-text-font);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--md-default-fg-color);
+  border-bottom: 2px solid var(--ibx-green);
+  padding-bottom: 0.3em;
+}
+
+.md-typeset h3,
+.md-typeset h4 {
+  font-family: var(--md-text-font);
+  font-weight: 700;
+  color: var(--md-default-fg-color);
+}
+
+/* ============================================================================
+ * Links
+ * ========================================================================= */
+
+.md-typeset a {
+  color: var(--ibx-accent-text);
+  text-decoration: none;
+}
+
+.md-typeset a:hover {
+  color: var(--ibx-accent-text-hover);
+  text-decoration: underline;
+}
+
+/* ============================================================================
+ * Tables (simple, brand colors, no effects per brand rules)
+ * ========================================================================= */
+
+.md-typeset table:not([class]) th {
+  background-color: var(--ibx-black);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-family: var(--md-text-font);
+}
+
+[data-md-color-scheme="default"] .md-typeset table:not([class]) tr:nth-child(even) td {
+  background-color: var(--ibx-off-white);
+}
+
+/* ============================================================================
+ * Admonitions (note, warning, tip boxes)
+ * ========================================================================= */
+
+/* Note boxes use green accent */
+.md-typeset .admonition.note,
+.md-typeset details.note {
+  border-color: var(--ibx-green);
+}
+
+.md-typeset .note > .admonition-title,
+.md-typeset .note > summary {
+  background-color: rgba(0, 189, 77, 0.1);
+  border-color: var(--ibx-green);
+}
+
+.md-typeset .note > .admonition-title::before,
+.md-typeset .note > summary::before {
+  color: var(--ibx-accent-text);
+}
+
+/* Warning boxes use yellow accent */
+.md-typeset .admonition.warning,
+.md-typeset details.warning {
+  border-color: var(--ibx-yellow);
+}
+
+.md-typeset .warning > .admonition-title,
+.md-typeset .warning > summary {
+  background-color: rgba(254, 221, 0, 0.1);
+}
+
+/* ============================================================================
+ * Code Blocks
+ * ========================================================================= */
+
+.md-typeset code {
+  font-size: 0.85em;
+  border-radius: 3px;
+}
+
+[data-md-color-scheme="default"] .md-typeset code {
+  background-color: var(--ibx-off-white);
+  color: var(--ibx-black);
+}
+
+/* Inline code inherits the link's accent colour */
+.md-typeset a > code {
+  color: var(--ibx-accent-text);
+}
+
+/* ============================================================================
+ * Tabs (content tabs)
+ * ========================================================================= */
+
+.md-typeset .tabbed-labels > label.tabbed-label--active {
+  color: var(--ibx-accent-text);
+  border-color: var(--ibx-accent-text);
+}
+
+/* ============================================================================
+ * Search
+ * ========================================================================= */
+
+.md-search-result mark {
+  background-color: rgba(0, 189, 77, 0.3);
+  color: inherit;
+}
+
+/* ============================================================================
+ * Footer
+ * ========================================================================= */
+
+.md-footer,
+.md-footer-meta {
+  background-color: var(--ibx-black);
+  color: #FFFFFF;
+}
+
+.md-footer a,
+.md-footer__link,
+.md-footer__title,
+.md-footer__direction,
+.md-footer-meta a,
+.md-copyright,
+.md-copyright a,
+.md-copyright__highlight {
+  color: #FFFFFF;
+}
+
+/* Hide "Made with Zensical" generator credit while keeping copyright visible */
+.md-copyright {
+  font-size: 0;
+}
+
+.md-copyright > a[href*="zensical"] {
+  display: none;
+}
+
+.md-copyright__highlight {
+  font-size: 0.64rem;
+}
+
+.md-footer a:hover,
+.md-footer__link:hover,
+.md-footer-meta a:hover {
+  color: var(--ibx-green);
+}
+
+/* Gradient bar above footer */
+.md-footer::before {
+  content: "";
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, #FEDD00 0%, #00BD4D 35%, #00E2EC 100%);
+}
+
+/* ============================================================================
+ * Scrollbar (subtle brand touch)
+ * ========================================================================= */
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--ibx-steel);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--ibx-green);
+}
+
+/* ============================================================================
+ * Permalink anchors (hide ¶, show link icon on hover)
+ * ========================================================================= */
+
+.md-typeset .headerlink {
+  font-size: 0;
+  visibility: hidden;
+  margin-left: 0.5em;
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.md-typeset .headerlink::after {
+  content: "#";
+  font-size: 0.7em;
+  visibility: visible;
+  color: var(--ibx-steel);
+}
+
+.md-typeset h1:hover .headerlink,
+.md-typeset h2:hover .headerlink,
+.md-typeset h3:hover .headerlink,
+.md-typeset h4:hover .headerlink,
+.md-typeset h5:hover .headerlink,
+.md-typeset h6:hover .headerlink {
+  opacity: 1;
+}
+
+.md-typeset .headerlink:hover::after {
+  color: var(--ibx-accent-text);
+}
+
+/* ============================================================================
+ * Selection highlight
+ * ========================================================================= */
+
+::selection {
+  background-color: rgba(0, 189, 77, 0.25);
+  color: inherit;
+}

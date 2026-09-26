@@ -1,0 +1,831 @@
+{
+ "_comment": "Rows captured from NIOS 9.1.0-54969 (WAPI 2.14) with every readable field requested; hostnames, addresses and secrets scrubbed. Each listed object type previously raised ValidationError in the typed models.",
+ "rows": {
+  "admingroup": [
+   {
+    "_ref": "admingroup/b25lLmFkbWluX2dyb3VwJC5hZG1pbi1ncm91cA:admin-group",
+    "access_method": [
+     "GUI",
+     "API",
+     "TAXII",
+     "CLI"
+    ],
+    "disable": false,
+    "disable_concurrent_login": false,
+    "email_addresses": [],
+    "enable_restricted_user_access": false,
+    "extattrs": {},
+    "inactivity_lockout_setting": {
+     "account_inactivity_lockout_enable": false,
+     "inactive_days": 30,
+     "reactivate_via_remote_console_enable": true,
+     "reactivate_via_serial_console_enable": true,
+     "reminder_days": 15
+    },
+    "lockout_setting": {
+     "enable_sequential_failed_login_attempts_lockout": false,
+     "failed_lockout_duration": 5,
+     "never_unlock_user": false,
+     "sequential_attempts": 5
+    },
+    "name": "admin-group",
+    "password_setting": {
+     "expire_days": 30,
+     "expire_enable": false,
+     "reminder_days": 15
+    },
+    "roles": [],
+    "superuser": true,
+    "use_account_inactivity_lockout_enable": true,
+    "use_disable_concurrent_login": false,
+    "use_lockout_setting": false,
+    "use_password_setting": false,
+    "user_access": [],
+    "uuid": "c4bbb0cb7c904b51b7a890a6122d4117"
+   }
+  ],
+  "grid": [
+   {
+    "_ref": "grid/b25lLmNsdXN0ZXIkMA:FFY",
+    "allow_recursive_deletion": "ALL",
+    "audit_log_format": "WAPI_DETAILED",
+    "automated_traffic_capture_setting": {
+     "destination": "NONE",
+     "include_support_bundle": false,
+     "keep_local_copy": false,
+     "traffic_capture_enable": false
+    },
+    "dns_resolver_setting": {
+     "resolvers": [
+      "host.example.com"
+     ],
+     "search_domains": []
+    },
+    "email_setting": {
+     "enabled": false,
+     "port_number": 25,
+     "relay_enabled": false,
+     "smtps": false,
+     "use_authentication": false
+    },
+    "enable_recycle_bin": false,
+    "lockout_setting": {
+     "enable_sequential_failed_login_attempts_lockout": false,
+     "failed_lockout_duration": 5,
+     "never_unlock_user": false,
+     "sequential_attempts": 5
+    },
+    "name": "FFY",
+    "ntp_setting": {
+     "enable_ntp": true,
+     "gm_local_ntp_stratum": 13,
+     "local_ntp_stratum": 15,
+     "ntp_acl": {
+      "ac_list": [],
+      "acl_type": "NONE",
+      "service": "TIME"
+     },
+     "ntp_keys": [],
+     "ntp_kod": false,
+     "ntp_servers": [
+      {
+       "address": "host.example.com",
+       "burst": true,
+       "enable_authentication": false,
+       "iburst": true,
+       "preferred": false
+      },
+      {
+       "address": "host.example.com",
+       "burst": true,
+       "enable_authentication": false,
+       "iburst": true,
+       "preferred": false
+      },
+      {
+       "address": "host.example.com",
+       "burst": true,
+       "enable_authentication": false,
+       "iburst": true,
+       "preferred": false
+      }
+     ],
+     "use_default_stratum": true
+    },
+    "password_setting": {
+     "chars_to_change": 0,
+     "expire_days": 30,
+     "expire_enable": false,
+     "force_reset_enable": false,
+     "history_enable": false,
+     "min_password_age": 0,
+     "num_lower_char": 0,
+     "num_numeric_char": 0,
+     "num_passwords_saved": 5,
+     "num_symbol_char": 0,
+     "num_upper_char": 0,
+     "password_min_length": 4,
+     "reminder_days": 15
+    },
+    "restart_banner_setting": {
+     "enable_double_confirmation": false,
+     "enabled": true
+    },
+    "restart_status": {
+     "_ref": "grid:servicerestart:status/Li5yZXN0YXJ0X3N0YXR1cyQuY29tLmluZm9ibG94Lm9uZS5jbHVzdGVyJDAuR1JJRA:FFY",
+     "failures": 0,
+     "finished": 0,
+     "grouped": "GRID",
+     "needed_restart": 0,
+     "no_restart": 0,
+     "parent": "grid/b25lLmNsdXN0ZXIkMA:FFY",
+     "pending": 0,
+     "pending_restart": 0,
+     "processing": 0,
+     "restarting": 0,
+     "success": 0,
+     "timeouts": 0
+    },
+    "scheduled_backup": {
+     "backup_frequency": "WEEKLY",
+     "backup_type": "LOCAL",
+     "discovery_data": true,
+     "download_keys": false,
+     "enable": true,
+     "hour_of_day": 3,
+     "keep_local_copy": false,
+     "minutes_past_hour": 0,
+     "nios_data": true,
+     "operation": "NONE",
+     "restore_type": "FTP",
+     "splunk_app_data": true,
+     "status": "IDLE",
+     "upload_keys": false,
+     "use_keys": false,
+     "weekday": "SATURDAY"
+    },
+    "security_setting": {
+     "admin_access_items": [],
+     "audit_log_rolling_enable": true,
+     "disable_concurrent_login": false,
+     "http_redirect_enable": false,
+     "inactivity_lockout_setting": {
+      "account_inactivity_lockout_enable": false,
+      "inactive_days": 30,
+      "reactivate_via_remote_console_enable": true,
+      "reactivate_via_serial_console_enable": true,
+      "reminder_days": 15
+     },
+     "login_banner_enable": true,
+     "login_banner_text": "Disconnect NOW if you have not been expressly authorized to use this system.",
+     "remote_console_access_enable": true,
+     "security_access_enable": false,
+     "security_access_remote_console_enable": true,
+     "session_timeout": 86400,
+     "ssh_perm_enable": true,
+     "support_access_enable": false,
+     "support_access_info": "Not enabled"
+    },
+    "service_status": "WARNING",
+    "snmp_setting": {
+     "engine_id": [
+      "80:00:1E:63:05:bc:24:11:0e:d5:85:0a:40:28:28"
+     ],
+     "queries_enable": false,
+     "snmpv3_queries_enable": false,
+     "snmpv3_traps_enable": false,
+     "syscontact": [],
+     "sysdescr": [],
+     "syslocation": [],
+     "sysname": [],
+     "trap_receivers": [],
+     "traps_enable": false
+    },
+    "syslog_servers": [],
+    "threshold_traps": [
+     {
+      "trap_reset": 70,
+      "trap_trigger": 81,
+      "trap_type": "CpuUsage"
+     },
+     {
+      "trap_reset": 70,
+      "trap_trigger": 80,
+      "trap_type": "DBObjects"
+     },
+     {
+      "trap_reset": 85,
+      "trap_trigger": 95,
+      "trap_type": "DBWrites"
+     },
+     {
+      "trap_reset": 70,
+      "trap_trigger": 85,
+      "trap_type": "Disk"
+     },
+     {
+      "trap_reset": 89,
+      "trap_trigger": 90,
+      "trap_type": "ExtStorage"
+     },
+     {
+      "trap_reset": 70,
+      "trap_trigger": 90,
+      "trap_type": "FDUsage"
+     },
+     {
+      "trap_reset": 0,
+      "trap_trigger": 0,
+      "trap_type": "FastpathDroppedTraffic"
+     },
+     {
+      "trap_reset": 70,
+      "trap_trigger": 90,
+      "trap_type": "Fastpathmbuffdepletion"
+     },
+     {
+      "trap_reset": 85,
+      "trap_trigger": 95,
+      "trap_type": "IPAMUtilization"
+     },
+     {
+      "trap_reset": 80,
+      "trap_trigger": 90,
+      "trap_type": "Memory"
+     },
+     {
+      "trap_reset": 75,
+      "trap_trigger": 85,
+      "trap_type": "NetworkCapacity"
+     },
+     {
+      "trap_reset": 2,
+      "trap_trigger": 10,
+      "trap_type": "RPZHitRate"
+     },
+     {
+      "trap_reset": 30,
+      "trap_trigger": 80,
+      "trap_type": "RecursiveClients"
+     },
+     {
+      "trap_reset": 70,
+      "trap_trigger": 85,
+      "trap_type": "Reporting"
+     },
+     {
+      "trap_reset": 71,
+      "trap_trigger": 80,
+      "trap_type": "ReportingVolume"
+     },
+     {
+      "trap_reset": 70,
+      "trap_trigger": 85,
+      "trap_type": "Rootfs"
+     },
+     {
+      "trap_reset": 0,
+      "trap_trigger": 0,
+      "trap_type": "SwapUsage"
+     },
+     {
+      "trap_reset": 0,
+      "trap_trigger": 1,
+      "trap_type": "TcpUdpFloodAlertRate"
+     },
+     {
+      "trap_reset": 0,
+      "trap_trigger": 1,
+      "trap_type": "TcpUdpFloodDropRate"
+     },
+     {
+      "trap_reset": 5,
+      "trap_trigger": 10,
+      "trap_type": "ThreatProtectionDroppedTraffic"
+     },
+     {
+      "trap_reset": 70,
+      "trap_trigger": 90,
+      "trap_type": "ThreatProtectionTotalTraffic"
+     },
+     {
+      "trap_reset": 70,
+      "trap_trigger": 85,
+      "trap_type": "Tmpfs"
+     }
+    ],
+    "time_zone": "US/Central",
+    "trap_notifications": [
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "AnalyticsRPZ"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": false,
+      "trap_type": "AutomatedTrafficCapture"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "BFD"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "BGP"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "Backup"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "CPU"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "CaptivePortal"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "CiscoISEServer"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "Clear"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "CloudAPI"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "CloudDNSsync"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "Cluster"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "Controld"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "DBActivity"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "DHCP"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "DNS"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "DNSAttack"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "DNSIntegrityCheck"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "DNSIntegrityCheckConnection"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "Database"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "DisconnectedGrid"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "Discovery"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "DiscoveryConflict"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "DiscoveryUnmanaged"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "Disk"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "DuplicateIP"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "ENAT"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "FDUsage"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "FTP"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "Fan"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "HA"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "HAOnCloud"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "HSM"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "HTTP"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "IFMAP"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "IMC"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "IMCGRPCServer"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "IPAMUtilization"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "IPMIDevice"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "LCD"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "LDAPServers"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "License"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "Login"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "MGM"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "MSServer"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "Memory"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "NTP"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "Network"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "OCSPResponders"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "OSPF"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "OSPF6"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "Outbound"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "PowerSupply"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "RAID"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "RIRSWIP"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": false,
+      "trap_type": "RPZHitRate"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "RecursiveClients"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "Reporting"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "RootFS"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "SNMP"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "SSH"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "SerialConsole"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "SwapUsage"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "Syslog"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "System"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "TFTP"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "Taxii"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "ThreatInsight"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "ThreatProtection"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "TmpFS"
+     },
+     {
+      "enable_email": false,
+      "enable_trap": true,
+      "trap_type": "WATCHFRR"
+     }
+    ],
+    "updates_download_member_config": [
+     {
+      "interface": "ANY",
+      "is_online": true,
+      "member": null
+     }
+    ],
+    "vpn_port": 1194
+   }
+  ],
+  "dhcpoptionspace": [
+   {
+    "_ref": "dhcpoptionspace/ZG5zLm9wdGlvbl9zcGFjZSRESENQLi5mYWxzZQ:DHCP",
+    "name": "DHCP",
+    "option_definitions": [
+     "subnet-mask",
+     "time-offset",
+     "routers",
+     "time-servers",
+     "ien116-name-servers",
+     "domain-name-servers",
+     "log-servers",
+     "cookie-servers",
+     "lpr-servers",
+     "impress-servers",
+     "resource-location-servers",
+     "host-name",
+     "boot-size",
+     "merit-dump",
+     "domain-name",
+     "swap-server",
+     "root-path",
+     "extensions-path",
+     "ip-forwarding",
+     "non-local-source-routing",
+     "policy-filter",
+     "max-dgram-reassembly",
+     "default-ip-ttl",
+     "path-mtu-aging-timeout",
+     "path-mtu-plateau-table",
+     "interface-mtu",
+     "all-subnets-local",
+     "broadcast-address",
+     "perform-mask-discovery",
+     "mask-supplier",
+     "router-discovery",
+     "router-solicitation-address",
+     "static-routes",
+     "trailer-encapsulation",
+     "arp-cache-timeout",
+     "ieee802-3-encapsulation",
+     "default-tcp-ttl",
+     "tcp-keepalive-interval",
+     "tcp-keepalive-garbage",
+     "nis-domain",
+     "nis-servers",
+     "ntp-servers",
+     "vendor-encapsulated-options",
+     "netbios-name-servers",
+     "netbios-dd-server",
+     "netbios-node-type",
+     "netbios-scope",
+     "font-servers",
+     "x-display-manager",
+     "dhcp-requested-address",
+     "dhcp-lease-time",
+     "dhcp-option-overload",
+     "dhcp-message-type",
+     "dhcp-server-identifier",
+     "dhcp-parameter-request-list",
+     "dhcp-message",
+     "dhcp-max-message-size",
+     "dhcp-renewal-time",
+     "dhcp-rebinding-time",
+     "vendor-class-identifier",
+     "dhcp-client-identifier",
+     "nwip-domain",
+     "nwip-suboptions",
+     "nisplus-domain",
+     "nisplus-servers",
+     "tftp-server-name",
+     "bootfile-name",
+     "mobile-ip-home-agent",
+     "smtp-server",
+     "pop-server",
+     "nntp-server",
+     "www-server",
+     "finger-server",
+     "irc-server",
+     "streettalk-server",
+     "streettalk-directory-assistance-server",
+     "user-class",
+     "slp-directory-agent",
+     "slp-service-scope",
+     "fqdn",
+     "relay-agent-information",
+     "nds-servers",
+     "nds-tree-name",
+     "nds-context",
+     "bcms-controller-address",
+     "client-last-transaction-time",
+     "associated-ip",
+     "uap-servers",
+     "netinfo-server-address",
+     "netinfo-server-tag",
+     "default-url",
+     "subnet-selection",
+     "domain-search",
+     "vivco",
+     "vivso",
+     "option-120",
+     "option-128",
+     "option-150",
+     "option-160",
+     "option-161",
+     "option-176",
+     "option-191",
+     "option-230",
+     "DOGroupId",
+     "DOCacheHost",
+     "option_242_avaya2",
+     "option-252",
+     "option-162",
+     "option-186"
+    ],
+    "space_type": "PREDEFINED_DHCP",
+    "uuid": "2a81306934f3475eb0463cb2c7b68755"
+   }
+  ],
+  "fingerprint": [
+   {
+    "_ref": "fingerprint/ZG5zLmRoY3BfZmluZ2VycHJpbnQkTWljcm9zb2Z0IFdpbmRvd3MgS2VybmVsIDUuMSw1LjI:Microsoft%20Windows%20Kernel%205.1%2C5.2",
+    "device_class": "Windows OS",
+    "disable": false,
+    "extattrs": {},
+    "ipv6_option_sequence": [],
+    "name": "Microsoft Windows Kernel host.example.com,host.example.com",
+    "option_sequence": [
+     "1,15,3,6,44,46,4",
+     "1,15,3,6,44,46,47,31,33,121,249,43,200",
+     "1,15,3,6,44,46,47,31,33,249,43",
+     "1,15,3,6,44,46,47,31,33,249,43,252",
+     "1,15,3,6,44,46,47,31,33,249,43,252,12",
+     "15,3,6,44,46,47,31,33,249,43",
+     "15,3,6,44,46,47,31,33,249,43,252",
+     "15,3,6,44,46,47,31,33,249,43,252,12",
+     "28,2,3,15,6,12,44,47"
+    ],
+    "type": "STANDARD",
+    "uuid": "ff738ffc3a7e493e97c3024915dcd3df",
+    "vendor_id": [
+     "MSFT host.example.com"
+    ]
+   }
+  ]
+ }
+}

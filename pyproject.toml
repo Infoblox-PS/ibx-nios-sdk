@@ -1,0 +1,147 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (C) 2026 Infoblox, Inc.
+[build-system]
+requires = ["setuptools>=77.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ibx-nios-sdk"
+version = "1.0.0"
+description = "Async Python client for the Infoblox NIOS WAPI"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+authors = [{ name = "Infoblox" }]
+keywords = [
+    "infoblox",
+    "nios",
+    "wapi",
+    "ddi",
+    "dns",
+    "dhcp",
+    "ipam",
+    "async",
+    "sdk",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Operating System :: OS Independent",
+    "Framework :: AsyncIO",
+    "Topic :: Internet :: Name Service (DNS)",
+    "Topic :: System :: Networking",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+dependencies = [
+    "httpx>=0.27",
+    "pydantic>=2",
+    "python-dateutil>=2.8.2",
+]
+
+[project.optional-dependencies]
+cli = [
+    # click.ParamType became generic in 8.4; nios-get-log subscripts it.
+    "click>=8.4",
+    "click-option-group>=0.5",
+]
+dev = [
+    "pytest>=8",
+    "pytest-asyncio>=0.24",
+    "pytest-cov>=5",
+    "mypy>=1.10",
+    "ruff>=0.5",
+    # Loads .env for the live integration tests (see .env.example).
+    "python-dotenv>=1.0",
+]
+docs = [
+    # Pinned to the schema these docs are written against: 0.0.65 moved the
+    # mkdocstrings handler settings out of [project.plugins.mkdocstrings.config].
+    "zensical>=0.0.65",
+    "mkdocstrings[python]>=1.0.6",
+]
+
+[project.scripts]
+nios-csvexport = "ibx_nios_sdk.bin.nios_csvexport:main"
+nios-csvimport = "ibx_nios_sdk.bin.nios_csvimport:main"
+nios-get-file = "ibx_nios_sdk.bin.nios_get_file:main"
+nios-get-log = "ibx_nios_sdk.bin.nios_get_log:main"
+nios-get-supportbundle = "ibx_nios_sdk.bin.nios_get_supportbundle:main"
+nios-grid-backup = "ibx_nios_sdk.bin.nios_grid_backup:main"
+nios-grid-restore = "ibx_nios_sdk.bin.nios_grid_restore:main"
+nios-certificate = "ibx_nios_sdk.bin.nios_certificate:main"
+nios-restart-service = "ibx_nios_sdk.bin.nios_restart_service:main"
+nios-restart-status = "ibx_nios_sdk.bin.nios_restart_status:main"
+
+[project.urls]
+Homepage = "https://infoblox-ps.github.io/ibx-nios-sdk/"
+Documentation = "https://infoblox-ps.github.io/ibx-nios-sdk/"
+Repository = "https://github.com/Infoblox-PS/ibx-nios-sdk"
+Issues = "https://github.com/Infoblox-PS/ibx-nios-sdk/issues"
+Changelog = "https://github.com/Infoblox-PS/ibx-nios-sdk/blob/main/CHANGELOG.md"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"*" = ["py.typed"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 99
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "TCH"]
+ignore = ["E501", "TC001", "TC002", "TC003", "SIM105"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["ibx_nios_sdk"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["tests"]
+markers = [
+    "integration: live integration tests that hit a real NIOS grid (requires NIOS_LIVE=1)",
+]
+
+[tool.coverage.run]
+source = ["ibx_nios_sdk"]
+omit = [
+    # Click console entry points - thin CLI wrappers around the already-tested
+    # library surface. Covered via shell invocations, not unit tests.
+    "src/ibx_nios_sdk/bin/*",
+]
+
+[tool.coverage.report]
+exclude_also = [
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+    "\\.\\.\\.",
+]
+show_missing = true
+fail_under = 100
+
+[tool.pymarkdown]
+# Markdown lint for README.md and docs/. Scan with:
+#   pipx run pymarkdownlnt --config pyproject.toml scan -r README.md docs/
+# Line length is off: two thirds of the hits are Markdown table rows, which
+# cannot be wrapped without destroying the table, and the rest are reference
+# links. The structural rules below are the ones that catch real defects.
+plugins.md013.enabled = false
+# The docs use `!!!` admonitions. pymarkdown reads their 4-space-indented bodies
+# as indented code blocks, and its fixer would un-indent them into bare fences,
+# destroying the admonition while still linting and building clean. Leave off.
+plugins.code-block-style.enabled = false
+# CHANGELOG.md repeats Added/Changed/Fixed under each version, as Keep a Changelog
+# prescribes. Only flag duplicate headings that are siblings of one another.
+plugins.md024.siblings_only = true

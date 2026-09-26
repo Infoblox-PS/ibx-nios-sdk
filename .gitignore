@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+
+# Virtualenv
+.venv/
+venv/
+
+# Local grid credentials for the live integration tests - never commit
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+
+# Docs output
+site/
+
+# OS
+.DS_Store
+
+# Local assistant / tooling state - never publish
+CLAUDE.md
+.claude/
+
+# Swagger snapshots - fetched on-demand from a live grid, not shipped
+schemas/
+
+# Audit artifacts (local only)
+SCHEMA_AUDIT.md
+SCHEMA_AUDIT_DEEP.md
+
+# uv lockfile - this is a library; downstream consumers resolve on their own
+uv.lock

@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (C) 2026 Infoblox, Inc.
+graft docs
+include LICENSE
+include zensical.toml
+global-exclude __pycache__ *.py[cod]

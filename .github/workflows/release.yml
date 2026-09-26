@@ -1,0 +1,112 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (C) 2026 Infoblox, Inc.
+# NIOS Python SDK release workflow.
+name: Release
+
+# Creates (or updates) a GitHub Release when a tag matching "v*" is
+# pushed. Builds the Python distribution (wheel + sdist), attaches it to the
+# release, then publishes it to PyPI.
+#
+# Security note: every dynamic value used in shell scripts is passed via
+# `env:` with quoted variable expansion. We never interpolate
+# ${{ ... }} directly into a `run:` script.
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    name: Build distribution and publish release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Need the tag's annotation for the release notes.
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install build deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install build
+
+      - name: Build Python distribution (wheel + sdist)
+        run: python -m build
+
+      # Extract the tag's annotation message as the release notes. Write
+      # to a file rather than interpolating into the shell so multi-line
+      # content and special characters are handled safely.
+      - name: Extract release notes from tag annotation
+        env:
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          git tag -l --format='%(contents)' "$REF_NAME" > release-notes.md
+          if [[ ! -s release-notes.md ]]; then
+            echo "Release $REF_NAME" > release-notes.md
+          fi
+          echo "--- release notes ---"
+          cat release-notes.md
+
+      - name: Create or update GitHub Release with the distribution
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          if gh release view "$REF_NAME" >/dev/null 2>&1; then
+            echo "Release $REF_NAME already exists - uploading/replacing assets."
+            gh release upload "$REF_NAME" --clobber dist/*.whl dist/*.tar.gz
+          else
+            echo "Creating release $REF_NAME."
+            gh release create "$REF_NAME" \
+              --title "$REF_NAME" \
+              --notes-file release-notes.md \
+              dist/*.whl dist/*.tar.gz
+          fi
+
+      - name: Store distribution as workflow artifact (audit trail)
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-artifacts-${{ github.ref_name }}
+          path: dist/
+
+  # Publishing is a separate job so a PyPI failure cannot leave the GitHub
+  # release half-made, and so the upload runs with only the permissions it
+  # needs. Authentication is PyPI Trusted Publishing (OIDC): no API token is
+  # stored anywhere, and the `pypi` environment gates the upload.
+  publish-pypi:
+    name: Publish to PyPI
+    needs: build-and-release
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/ibx-nios-sdk
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: release-artifacts-${{ github.ref_name }}
+          path: artifacts
+
+      # upload-artifact flattens a single directory path, so the files can
+      # arrive at artifacts/ or artifacts/dist/ depending on what was packed.
+      - name: Collect the distribution
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          find artifacts -type f \( -name '*.whl' -o -name '*.tar.gz' \) \
+            -exec mv {} dist/ \;
+          ls -l dist
+          test -n "$(ls -A dist)"
+
+      - uses: pypa/gh-action-pypi-publish@release/v1

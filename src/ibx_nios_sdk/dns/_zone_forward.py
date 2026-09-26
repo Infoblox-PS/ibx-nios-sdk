@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (C) 2026 Infoblox, Inc.
+"""ZoneForward resource - forward DNS zone CRUD."""
+
+from __future__ import annotations
+
+from ibx_nios_sdk._resource import WapiResource
+from ibx_nios_sdk.dns.models.zone_forward import READONLY_FIELDS, ZoneForward
+
+
+class ZoneForwardResource(WapiResource[ZoneForward]):
+    """Manage NIOS forward DNS zone configurations."""
+
+    _wapi_type = "zone_forward"
+    _model = ZoneForward
+    _default_return_fields = ["fqdn", "view", "comment", "disable", "forward_to"]
+    _readonly_fields = set(READONLY_FIELDS)
+    _create_only_fields = {"fqdn", "zone_format"}
