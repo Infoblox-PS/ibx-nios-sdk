@@ -81,8 +81,15 @@ jobs:
 
   # Publishing is a separate job so a PyPI failure cannot leave the GitHub
   # release half-made, and so the upload runs with only the permissions it
-  # needs. Authentication is PyPI Trusted Publishing (OIDC): no API token is
-  # stored anywhere, and the `pypi` environment gates the upload.
+  # needs. The `pypi` environment gates the upload.
+  #
+  # Authentication takes whichever of the two is configured:
+  #   - PyPI Trusted Publishing (OIDC), used when no PYPI_API_TOKEN secret
+  #     exists. Nothing is stored in the repository. Configure it at
+  #     https://pypi.org/manage/account/publishing/ with owner Infoblox-PS,
+  #     repository ibx-nios-sdk, workflow release.yml, environment pypi.
+  #   - An API token in the PYPI_API_TOKEN secret, which takes precedence when
+  #     set (`gh secret set PYPI_API_TOKEN`).
   publish-pypi:
     name: Publish to PyPI
     needs: build-and-release
@@ -109,4 +116,7 @@ jobs:
           ls -l dist
           test -n "$(ls -A dist)"
 
+      # An empty password falls through to Trusted Publishing.
       - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
