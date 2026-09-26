@@ -65,6 +65,28 @@ Never commit a grid address or credential.
 - **Commits** describe one concern each, in the imperative mood, with the
   reasoning in the body where it is not obvious from the diff.
 
+## Cutting a release
+
+Releases are driven entirely by an annotated tag; never publish by hand.
+
+1. Bump `version` in `pyproject.toml` and `src/ibx_nios_sdk/_version.py`, the
+   README badge, and the assertion in `tests/test_imports.py`.
+2. Add the version's section to `CHANGELOG.md`.
+3. Commit, then tag with an annotation - its text becomes the GitHub release
+   notes:
+
+   ```bash
+   git tag -a v1.2.3 -m "v1.2.3 - summary of the release"
+   git push origin main v1.2.3
+   ```
+
+The tag push runs `release.yml`, which refuses to continue unless the tag
+matches the packaged version and the changelog has a matching section, then
+builds the wheel and sdist, creates the GitHub release, and publishes to PyPI.
+
+Never move or delete a published tag: GitHub demotes that tag's release to a
+draft, and PyPI refuses to accept a version number twice.
+
 ## Reporting bugs
 
 Open an issue with the SDK version, the NIOS and WAPI versions, the call you

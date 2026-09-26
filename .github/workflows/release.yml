@@ -38,6 +38,25 @@ jobs:
           python -m pip install --upgrade pip
           pip install build
 
+      # A tag whose version disagrees with pyproject.toml would publish the
+      # wrong version to PyPI, or collide with one already there. Fail here
+      # rather than half way through the release.
+      - name: Check the tag matches the packaged version
+        env:
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          packaged=$(python3 -c "import tomllib; print(tomllib.load(open('pyproject.toml','rb'))['project']['version'])")
+          if [[ "$REF_NAME" != "v$packaged" ]]; then
+            echo "::error::tag $REF_NAME does not match pyproject version $packaged (expected v$packaged)"
+            exit 1
+          fi
+          if ! grep -q "^## \[$packaged\]" CHANGELOG.md; then
+            echo "::error::CHANGELOG.md has no '## [$packaged]' section"
+            exit 1
+          fi
+          echo "tag $REF_NAME matches version $packaged, and the changelog has an entry"
+
       - name: Build Python distribution (wheel + sdist)
         run: python -m build
 
